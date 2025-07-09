@@ -6,6 +6,7 @@ import "../../styles/fonts.css"
 import { useEffect, useRef, useState } from "react"
 import NavItem from "./navItem";
 import classNames from "classnames";
+import CollapseButton from "./collapseButton";
 
 const observerThreshold: number = 0.5;
 
@@ -22,6 +23,7 @@ const NavLinks: INavLink[] = [
 export default function NavBar({ observerRefs } : {observerRefs : React.RefObject<HTMLElement[]>})
 {
     const [activeKey, setActiveKey] = useState(0);
+    const [isCollapsed, setIsCollapsed] = useState(true);
     const observers = useRef<IntersectionObserver[]>([]);
 
     const onClick = (_: any, key: number) => {
@@ -52,15 +54,21 @@ export default function NavBar({ observerRefs } : {observerRefs : React.RefObjec
     [observerRefs, observers])
 
     return (
-        <nav id="navbar" className="sticky top-0 w-64 h-screen bg-dark pt-4">
+        <nav id="navbar" 
+            className={classNames("sticky top-0 h-screen bg-dark p-4",
+                isCollapsed ? "w-21" : "w-64"
+            )}>
+            <CollapseButton isCollapsed={isCollapsed} 
+                        toggleIsCollapsed={() => setIsCollapsed(!isCollapsed)}/>
             <ul id='nav-links'
-                className="flex-col w-56 mx-4">
+                className="flex-col">
                     {NavLinks.map((link, key) => {
                         return (
                             <NavItem
                                 key={key}
                                 link={link}
-                                isActive={activeKey == key}>
+                                isActive={activeKey == key}
+                                isCollapsed={isCollapsed}>
                             </NavItem>
                         )
                     })}

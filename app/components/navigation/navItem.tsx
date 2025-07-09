@@ -2,7 +2,7 @@ import { NavLink } from "react-router";
 import type INavLink from "utils/interfaces/INavLink";
 import classNames from "classnames"
 
-export default function NavItem({link, isActive} : {link: INavLink, isActive: boolean})
+export default function NavItem({link, isActive, isCollapsed} : {link: INavLink, isActive: boolean, isCollapsed: boolean})
 {
     return (
         <li key = {link.name}
@@ -10,15 +10,21 @@ export default function NavItem({link, isActive} : {link: INavLink, isActive: bo
             <NavLink to={`#${link.id}`}
                      className={
                         classNames(isActive ? 'bg-primary' : 'bg-dark',
+                        isCollapsed ? "w-13" : "w-56",
                         "text-txt-light text-lg my-auto",
-                        "size-full w-56 h-12 my-4 rounded-lg flex",
+                        "size-full h-12 rounded-lg flex",
                         )}>
-                <div className="size-6 mx-4 my-3">
+                <div className={classNames(
+                    isCollapsed ? "m-auto" : "my-auto mx-4",
+                    "size-6"
+                )}>
                     {link.icon}
                 </div>
-                <div className="my-auto">
+                <span className={classNames(isCollapsed ? "sr-only" : "",
+                    "my-auto"
+                )}>
                     {link.name}
-                </div>
+                </span>
             </NavLink>
         </li>
     )
