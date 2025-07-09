@@ -1,6 +1,6 @@
-import type { ReactElement } from "react";
+import type { ReactElement } from 'react';
 
 export default interface ISection {
-    id: string,
-    content: ReactElement
+  id: string;
+  content: ReactElement;
 }

@@ -1,6 +1,6 @@
 import type { Route } from './+types/app';
 import { About } from '../components/about';
-import '../styles/colors.css'
+import '../styles/colors.css';
 import NavBar from 'components/navigation/navBar';
 import { Home } from 'components/home';
 import { useRef } from 'react';
@@ -14,14 +14,14 @@ export function meta({}: Route.MetaArgs) {
 }
 
 const sections: ISection[] = [
-    { id: "home", content: <Home />},
-    { id: "about", content: <About />},
-    { id: "experience", content: <About />},
-    { id: "projects", content: <About />},
-    { id: "skills", content: <About />},
-    { id: "education", content: <About />},
-    { id: "contact", content: <About />}
-]
+  { id: 'home', content: <Home /> },
+  { id: 'about', content: <About /> },
+  { id: 'experience', content: <About /> },
+  { id: 'projects', content: <About /> },
+  { id: 'skills', content: <About /> },
+  { id: 'education', content: <About /> },
+  { id: 'contact', content: <About /> }
+];
 
 export default function App() {
   const sectionRefs = useRef<HTMLElement[]>([]);
@@ -29,22 +29,25 @@ export default function App() {
   return (
     <div className="flex">
       <div className="flex-none">
-        <NavBar observerRefs={sectionRefs}/>
+        <NavBar observerRefs={sectionRefs} />
       </div>
-      <div className='flex-1'>
+      <div className="flex-1">
         <main>
-          {
-            sections.map((section, key) => {
-              return (
-                <section 
-                    id={section.id}
-                    key={section.id}
-                    ref={(el) => { if (el) { sectionRefs.current[key] = el }}}>
-                    {section.content}
-                </section>
-              )
-            })
-          }
+          {sections.map((section, key) => {
+            return (
+              <section
+                id={section.id}
+                key={section.id}
+                ref={(el) => {
+                  if (el) {
+                    sectionRefs.current[key] = el;
+                  }
+                }}
+              >
+                {section.content}
+              </section>
+            );
+          })}
 
           {/* <section id='home'
                   ref = {(el) => { if(el) { sectionRefs.current[0] = el}}}>
@@ -57,7 +60,5 @@ export default function App() {
         </main>
       </div>
     </div>
-  )
+  );
 }
-
-

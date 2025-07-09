@@ -1,5 +1,5 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
-    --font-standard: "Roboto-Serif"
+  --font-standard: 'Roboto-Serif';
 }
